@@ -34,7 +34,7 @@ public class UsuarioConverter {
                 .build();
     }
 
-    public List<Telefone> paraListTelefone(List<TelefoneDTO> telefoneDTOS){
+    public List<Telefone> paraListTelefone(List<TelefoneDTO> telefoneDTOS) {
         return telefoneDTOS.stream().map(this::paraTelefone).toList();
     }
 
@@ -72,7 +72,7 @@ public class UsuarioConverter {
                 .build();
     }
 
-    public List<TelefoneDTO> paraListTelefoneDTO(List<Telefone> telefoneDTOS){
+    public List<TelefoneDTO> paraListTelefoneDTO(List<Telefone> telefoneDTOS) {
         return telefoneDTOS.stream().map(this::paraTelefoneDTO).toList();
     }
 
@@ -112,6 +112,26 @@ public class UsuarioConverter {
                 .id(entity.getId())
                 .ddd(dto.getDdd() != null ? dto.getDdd() : entity.getDdd())
                 .numero(dto.getNumero() != null ? dto.getNumero() : entity.getNumero())
+                .build();
+    }
+
+    public Endereco paraEnderecoEntity(EnderecoDTO dto, Long idUsuario) {
+        return Endereco.builder()
+                .rua(dto.getRua())
+                .numero(dto.getNumero())
+                .complemento(dto.getComplemento())
+                .cep(dto.getCep())
+                .cidade(dto.getCidade())
+                .estado(dto.getEstado())
+                .usuario_id(idUsuario)
+                .build();
+    }
+
+    public Telefone paraTelefoneEntity(TelefoneDTO dto, Long idUsuario) {
+        return Telefone.builder()
+                .ddd(dto.getDdd())
+                .numero(dto.getNumero())
+                .usuario_id(idUsuario)
                 .build();
     }
 }
